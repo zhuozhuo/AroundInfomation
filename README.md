@@ -1,4 +1,4 @@
-T行业的我们很是苦恼,如果做的应用要世界通用,那就是痛苦了,需要考虑很多。例如：如果我们做一个地图应用,兼容中国和外国。要么使用国内地图+Google，要么就是使用苹果自带地图。今天主要介绍使用苹果自带地图获取用户当前位置及用户周围信息,地图移动时,地图中间指针一直在中间,移动结束后有下落定位的动画效果并更新当前位置及用户周围信息。具体可以看微信分享当前位置功能,Demo需要真机测试查看效果。
+> 天朝的网络在XXX的干预下,我们很多内容都不能正常访问,需要翻墙。处在这样一个大的局域网环境之下,作为IT行业的我们很是苦恼,如果做的应用要世界通用,那就是痛苦了,需要考虑很多。例如：如果我们做一个地图应用,兼容中国和外国。要么使用国内地图+Google，要么就是使用苹果自带地图。今天主要介绍使用苹果自带地图获取用户当前位置及用户周围信息,地图移动时,地图中间指针一直在中间,移动结束后有下落定位的动画效果并更新当前位置及用户周围信息。需要真机测试查看效果。
 
 **先看效果：**
 gif动画是在模拟器上录制，由于模拟器不能获取周围信息，所以一直在转菊花。要看实际效果需要真机查看。
@@ -9,17 +9,17 @@ gif动画是在模拟器上录制，由于模拟器不能获取周围信息，�
 ![IMG_2365.PNG](http://upload-images.jianshu.io/upload_images/2926059-038582bd5b5c11aa.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ## 步骤
 1. 添加库`MapKit.framework`。
-![模拟器效果展示](http://upload-images.jianshu.io/upload_images/2926059-128ced5cff4c3095.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+   ![模拟器效果展示](http://upload-images.jianshu.io/upload_images/2926059-128ced5cff4c3095.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 2. 打开地图功能。
-![真机截图](http://upload-images.jianshu.io/upload_images/2926059-bcaac77390f0f8a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+   ![真机截图](http://upload-images.jianshu.io/upload_images/2926059-bcaac77390f0f8a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 3. 代码实现。
 
 
 * 获取当前位置周围信息,苹果提供了一个请求方法,[`MKLocalSearch`](https://developer.apple.com/reference/mapkit/mklocalsearch?language=objc)。其官方介绍为：
 >An MKLocalSearch object initiates a map-based search operation and delivers the results back to your app asynchronously. Search objects are designed to perform one search operation only. To perform several different searches, you must create separate instances of this class and start them separately.
-也就是说我们如果要搜索不同的类型需要分别创建多个实例进行操作。
+>也就是说我们如果要搜索不同的类型需要分别创建多个实例进行操作。
 
 如果我们要搜索周围100米餐厅代码如下：
 
@@ -80,7 +80,7 @@ gif动画是在模拟器上录制，由于模拟器不能获取周围信息，�
 这里我的思路是三个动画效果组合以达到大头针下落定位的效果。
 
 * 获取用户滑动地图操作。
-`MKMapViewDelegate`中有个方法在滑动结束后可以回调如下所示：
+  `MKMapViewDelegate`中有个方法在滑动结束后可以回调如下所示：
 
 ```objective-c
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
