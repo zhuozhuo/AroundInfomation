@@ -21,7 +21,6 @@
 		9E4FDE411DD446F300CCFD6F /* ZHPlaceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4FDE401DD446F300CCFD6F /* ZHPlaceInfoModel.m */; };
 		9E4FDE451DD4489A00CCFD6F /* ZHPlaceInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4FDE431DD4489A00CCFD6F /* ZHPlaceInfoTableViewCell.m */; };
 		9E4FDE461DD4489A00CCFD6F /* ZHPlaceInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E4FDE441DD4489A00CCFD6F /* ZHPlaceInfoTableViewCell.xib */; };
-		9E4FDE4D1DD458D400CCFD6F /* ZHMapPolylineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4FDE4C1DD458D400CCFD6F /* ZHMapPolylineManager.m */; };
 		9E4FDE531DD45F4200CCFD6F /* ZHMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4FDE521DD45F4200CCFD6F /* ZHMapView.m */; };
 		9ED7FF4A1DD990ED00842BAB /* map_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ED7FF481DD990ED00842BAB /* map_location@2x.png */; };
 		9ED7FF4B1DD990ED00842BAB /* map_location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ED7FF491DD990ED00842BAB /* map_location@3x.png */; };
@@ -70,8 +69,6 @@
 		9E4FDE421DD4489A00CCFD6F /* ZHPlaceInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHPlaceInfoTableViewCell.h; sourceTree = "<group>"; };
 		9E4FDE431DD4489A00CCFD6F /* ZHPlaceInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHPlaceInfoTableViewCell.m; sourceTree = "<group>"; };
 		9E4FDE441DD4489A00CCFD6F /* ZHPlaceInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHPlaceInfoTableViewCell.xib; sourceTree = "<group>"; };
-		9E4FDE4B1DD458D400CCFD6F /* ZHMapPolylineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMapPolylineManager.h; sourceTree = "<group>"; };
-		9E4FDE4C1DD458D400CCFD6F /* ZHMapPolylineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHMapPolylineManager.m; sourceTree = "<group>"; };
 		9E4FDE511DD45F4200CCFD6F /* ZHMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMapView.h; sourceTree = "<group>"; };
 		9E4FDE521DD45F4200CCFD6F /* ZHMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHMapView.m; sourceTree = "<group>"; };
 		9ED7FF481DD990ED00842BAB /* map_location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_location@2x.png"; sourceTree = "<group>"; };
@@ -129,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				9E4FDE541DD4935700CCFD6F /* Resources */,
-				9E4FDE4A1DD458D400CCFD6F /* Manager */,
 				9E4FDE2C1DD31DC400CCFD6F /* Models */,
 				9E4FDE2A1DD31DBE00CCFD6F /* Views */,
 				9E4FDE2B1DD31DC400CCFD6F /* Controllers */,
@@ -209,15 +205,6 @@
 				9E4FDE361DD3220C00CCFD6F /* MapKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9E4FDE4A1DD458D400CCFD6F /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				9E4FDE4B1DD458D400CCFD6F /* ZHMapPolylineManager.h */,
-				9E4FDE4C1DD458D400CCFD6F /* ZHMapPolylineManager.m */,
-			);
-			path = Manager;
 			sourceTree = "<group>";
 		};
 		9E4FDE541DD4935700CCFD6F /* Resources */ = {
@@ -383,7 +370,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E4FDE4D1DD458D400CCFD6F /* ZHMapPolylineManager.m in Sources */,
 				9E4FDE2F1DD31DE000CCFD6F /* ZHRootTableViewController.m in Sources */,
 				9E4FDE411DD446F300CCFD6F /* ZHPlaceInfoModel.m in Sources */,
 				9E4FDDFC1DD31BCD00CCFD6F /* AppDelegate.m in Sources */,
