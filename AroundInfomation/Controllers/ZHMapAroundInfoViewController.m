@@ -31,6 +31,7 @@
 
 @implementation ZHMapAroundInfoViewController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.showTableView.tableFooterView = [UIView new];
@@ -85,10 +86,13 @@
 {
     
 }
+
+
 -(void)mapViewWillStartLocatingUser:(MKMapView *)mapView
 {
     NSLog(@"mapViewWillStartLocatingUser");
 }
+
 
 -(void)mapViewDidStopLocatingUser:(MKMapView *)mapView
 {
@@ -108,15 +112,20 @@
         
     }
 }
+
+
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
 {
     NSLog(@"didFailToLocateUserWithError:%@",error.localizedDescription);
 }
 
+
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
     NSLog(@"regionWillChangeAnimated");
 }
+
+
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     NSLog(@"regionDidChangeAnimated");
@@ -153,6 +162,7 @@
    
 }
 
+
 #pragma mark - Private Methods
 -(void)resetTableHeadView
 {
@@ -169,6 +179,7 @@
         
     }
 }
+
 
 -(void)addCenterLocationViewWithCenterPoint:(CGPoint)point
 {

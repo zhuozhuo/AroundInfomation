@@ -16,6 +16,36 @@ gif动画是在模拟器上录制，由于模拟器不能获取周围信息，�
 
 3. 代码实现。
 
+* 在用户位置显示完成后添加一个固定的`ImageView`在地图正中间。
+
+```Objective-c
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    NSLog(@"userLocation:longitude:%f---latitude:%f",userLocation.location.coordinate.longitude,userLocation.location.coordinate.latitude);
+    if (!haveGetUserLocation) {
+        if (self.mapView.userLocationVisible) {
+            haveGetUserLocation = YES;
+            [self getAddressByLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
+            [self addCenterLocationViewWithCenterPoint:self.mapView.center];
+        }
+        
+    }
+}
+
+
+-(void)addCenterLocationViewWithCenterPoint:(CGPoint)point
+{
+    if (!imgView) {
+        imgView = [[UIImageView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2, 100, 18, 38)];
+        imgView.center = point;
+        imgView.image = [UIImage imageNamed:@"map_location"];
+        imgView.center = self.mapView.center;
+        [self.view addSubview:imgView];
+    }
+    
+}
+
+```
 
 * 获取当前位置周围信息,苹果提供了一个请求方法,[`MKLocalSearch`](https://developer.apple.com/reference/mapkit/mklocalsearch?language=objc)。其官方介绍为：
 >An MKLocalSearch object initiates a map-based search operation and delivers the results back to your app asynchronously. Search objects are designed to perform one search operation only. To perform several different searches, you must create separate instances of this class and start them separately.
@@ -39,7 +69,7 @@ gif动画是在模拟器上录制，由于模拟器不能获取周围信息，�
 ```
 其中`naturalLanguageQuery`就是要搜索的关键字,我试过的所有关键字有`cafe, supermarket,village,Community，Shop,Restaurant，School，hospital，Company，Street，Convenience store，Shopping Centre，Place names，Hotel，Grocery store`每个关键字搜索返回结果只有10条，如果当前范围无搜索结果,则扩散搜索范围。如果你想列出周围所有相关位置信息，我认为需要尽可能的把所有的能够想到的关键字都举例出来进行搜索，搜索完成后进行经纬度比较然后刷选出范围内的相关位置。而且由于数据来源问题，很多位置信息都没有！当然如果你只兼容国内，还是使用百度或者腾讯地图算了。
 
-* 根据前经纬度获取位置相关信息。
+* 根据经纬度获取位置相关信息。
 
 ```objective-c
     CLLocation *location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
@@ -85,7 +115,7 @@ gif动画是在模拟器上录制，由于模拟器不能获取周围信息，�
 ```objective-c
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 ```
-但是它有个缺点就是在最开始初始化地图并定位到用户所在位置时,它会被反复回调。所以很难确定用户是否是滑动导致函数回调的。所以这里我们需要知道用户是否和地图有过接触后导致它的回调。如何做呢？这里有两种方法以供参考。
+因为回调是在展示的地图区域改变后调用，所以使用它有个缺点就是在最开始初始化地图并定位到用户所在位置时,它会被反复回调。所以很难确定用户是否是滑动。所以这里我们需要知道用户是否和地图有过滑动后导致它的回调。如何做呢？这里有两种方法以供参考。
 方法一：这里你是否想起` UIScrollView`,如果我们想获取`touch`事件，我们应该怎么做，没错就是继承后重写`touch`方法，然后把`toush`事件传递下去。代码如下：
 ```objective-c
 @implementation ZHMapView
@@ -160,4 +190,5 @@ gif动画是在模拟器上录制，由于模拟器不能获取周围信息，�
 }
 ```
 
-
+### 下载地址
+[GitHub](https://github.com/zhuozhuo/AroundInfomation)
