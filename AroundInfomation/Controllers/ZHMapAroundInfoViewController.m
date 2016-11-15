@@ -22,6 +22,7 @@
     NSMutableArray *infoArray;//周围信息
     UIImageView *imgView;//中间位置标志视图
     BOOL spanBool;//是否是滑动
+    BOOL pinchBool;//是否缩放
 }
 
 @end
@@ -32,6 +33,7 @@
     [super viewDidLoad];
     self.showTableView.tableFooterView = [UIView new];
     spanBool = NO;
+    pinchBool = NO;
     [self.showTableView registerNib:[UINib nibWithNibName:@"ZHPlaceInfoTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:CellIdntifier];
     geocoder=[[CLGeocoder alloc]init];
     infoArray = [NSMutableArray array];
@@ -52,6 +54,9 @@
             for (UIGestureRecognizer *gestureRecognizer in contentView.gestureRecognizers) {
                 if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
                     [gestureRecognizer addTarget:self action:@selector(mapViewSpanGesture:)];
+                }
+                if ([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]]) {
+                    [gestureRecognizer addTarget:self action:@selector(mapViewPinchGesture:)];
                 }
             }
 
@@ -113,7 +118,7 @@
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     NSLog(@"regionDidChangeAnimated");
-    if (imgView && spanBool) {
+    if (imgView && (spanBool||pinchBool)) {
         [infoArray removeAllObjects];
         [self.showTableView reloadData];
         [self resetTableHeadView];
@@ -132,6 +137,10 @@
                     if (finished) {
                         [UIView animateWithDuration:0.1 animations:^{
                             imgView.transform = CGAffineTransformIdentity;
+                        }completion:^(BOOL finished){
+                            if (finished) {
+                                spanBool = NO;
+                            }
                         }];
                     }
                 }];
@@ -305,11 +314,12 @@
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"moved");
+    spanBool = YES;
 }
 
 -(void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    spanBool = YES;
+   
 }
 
 
@@ -334,7 +344,6 @@
             break;
         case UIGestureRecognizerStateEnded:{
              NSLog(@"SpanGesture Ended");
-            spanBool = NO;
         }
             
             break;
@@ -342,6 +351,37 @@
         default:
             break;
     }
+}
+
+-(void)mapViewPinchGesture:(UIGestureRecognizer*)gesture
+{
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan:{
+            NSLog(@"PinchGesture Began");
+        }
+            break;
+        case UIGestureRecognizerStateChanged:{
+            NSLog(@"PinchGesture Changed");
+            pinchBool = YES;
+        }
+            
+            break;
+        case UIGestureRecognizerStateCancelled:{
+            NSLog(@"PinchGesture Cancelled");
+        }
+            
+            break;
+        case UIGestureRecognizerStateEnded:{
+            pinchBool = NO;
+            NSLog(@"PinchGesture Ended");
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
+
 }
 
 /*
