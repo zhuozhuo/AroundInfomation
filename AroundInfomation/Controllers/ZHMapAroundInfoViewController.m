@@ -25,6 +25,7 @@
     UIImageView *imgView;//中间位置标志视图
     BOOL spanBool;//是否是滑动
     BOOL pinchBool;//是否缩放
+    CLLocationManager *_locationManager;
 }
 
 @end
@@ -41,6 +42,11 @@
     geocoder=[[CLGeocoder alloc]init];
     infoArray = [NSMutableArray array];
     haveGetUserLocation = NO;
+    //请求定位服务
+    _locationManager=[[CLLocationManager alloc]init];
+    if(![CLLocationManager locationServicesEnabled]||[CLLocationManager authorizationStatus]!=kCLAuthorizationStatusAuthorizedWhenInUse){
+        [_locationManager requestWhenInUseAuthorization];
+    }
     self.mapView.userTrackingMode = MKUserTrackingModeFollowWithHeading;
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
